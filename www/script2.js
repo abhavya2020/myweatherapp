@@ -1,6 +1,7 @@
 var latitude;
 var longitude;
 var ic1;
+var flag=0;
  const K=273;
  const key="82005d27a116c2880c8f0fcb866998a0";
 (function(){
@@ -38,11 +39,12 @@ var city;
 
 function process()
         {
+             console.log(flag);
             const iconElement=document.querySelector(".weather-icon");
             const tempElement=document.querySelector(".temperature-value p ");
             const descElement=document.querySelector(".temperature-description p");
             const daycElement=document.querySelector(".dayc");
-            const locationElement=document.querySelector(".location p");
+            //const locationElement=document.querySelector(".location p");
             console.log(latitude,longitude);
             const weather={};
            
@@ -79,11 +81,23 @@ function process()
                 if(city!='')
                     {   var s=document.getElementById('list');
                              var i=s.options[s.selectedIndex].value;
-                    if(i=='0')
-                        {
-                        
-                        
-                        let api=`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+                         
+                        /* if(i==7)
+                             {
+                                 document.styleSheets[0].disabled=true;
+                                 
+                                 // document.styleSheets[1].disabled=false;
+                                 console.log(document.styleSheets[0].disabled);console.log(document.styleSheets[1].disabled);
+                             }else{
+                                 //document.styleSheets[0].disabled=false;
+                                  document.styleSheets[1].disabled=false;
+                                
+                               console.log(document.styleSheets[0].disabled);
+                                 console.log(document.styleSheets[1].disabled);
+                             } */
+        
+                       
+                     let api=`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
                             fetch(api)
                                 .then(function(response){
                                 let data=response.json();
@@ -97,20 +111,28 @@ function process()
                                 weather.city=data.name;
                             })
                             .then(function(){
-                                displayWeather();
+                                if(i=='0')
+                                  displayWeather();
                             })
                             .catch(function(err){
-                                alert("Enter correctly");
+                                console.log(err);
+                                //alert("Enter correctly");
                             });
                          
+                        
+                    if(i=='0')
+                        {
+                        
+                        
                            function displayWeather()
                            {
                                 iconElement.innerHTML=`<img src="icons/${weather.iconID}.png"/>`;
                                 tempElement.innerHTML=`${weather.temperature.value}° <span>C</span>`;
                                 descElement.innerHTML=weather.description;
-                                locationElement.innerHTML=`${weather.city},${weather.country}`; 
+                               // locationElement.innerHTML=`${weather.city},${weather.country}`; 
                                 
                                daycElement.innerHTML=dayAbbrv(0);
+                               console.log(daycElement.innerHTML);
                               
                             }
                         }  else{
@@ -133,7 +155,7 @@ function process()
                                      
                                     descElement.innerHTML=response.list[2].weather[0].description;
                                     console.log(response.city.name,response.population); 
-                                       locationElement.innerHTML=response.city.name;
+                                       //locationElement.innerHTML=response.city.name;
                                             daycElement.innerHTML=dayAbbrv(1);
                                             
                                         }
@@ -143,7 +165,7 @@ function process()
                                             iconElement.innerHTML=`<img src="icons/${ic}.png"/>`;
                                       
                                        tempElement.innerHTML=Math.floor(response.list[10].main.temp-K)+`° <span>C</span>`;
-                                            locationElement.innerHTML=response.city.name;
+                                           // locationElement.innerHTML=response.city.name;
                                      
                                       daycElement.innerHTML=dayAbbrv(2); descElement.innerHTML=response.list[10].weather[0].description;}
                                         if(i=='3'){
@@ -153,7 +175,8 @@ function process()
                                        tempElement.innerHTML=Math.floor(response.list[18].main.temp-K)+`° <span>C</span>`;
                                     
                                    daycElement.innerHTML=dayAbbrv(3); descElement.innerHTML=response.list[18].weather[0].description;
-                                        locationElement.innerHTML=response.city.name;}
+                                       // locationElement.innerHTML=response.city.name;
+                                        }
 
                                         if(i=='4'){
                                             let ic = response.list[26].weather[0].icon;
@@ -163,7 +186,8 @@ function process()
                                     tempElement.innerHTML=Math.floor(response.list[26].main.temp-K)+`° <span>C</span>`;
                                      
                                     descElement.innerHTML=response.list[26].weather[0].description;
-                                        locationElement.innerHTML=response.city.name;}
+                                       // locationElement.innerHTML=response.city.name;
+                                        }
 
                                         if(i=='5'){
                                             let ic = response.list[34].weather[0].icon;
@@ -173,21 +197,43 @@ function process()
                                     tempElement.innerHTML=Math.floor(response.list[34].main.temp-K)+`° <span>C</span>`;
                                     
                                     descElement.innerHTML=response.list[34].weather[0].description;
-                                        locationElement.innerHTML=response.city.name;}
+                                       // locationElement.innerHTML=response.city.name;
+                                        }
                                         if(i=='6'){
+                                            document.styleSheets[1].disabled=true;
                                             console.log(i)
                                             let ic = response.list[36].weather[0].icon;
                                             iconElement.innerHTML=`<img src="icons/${ic}.png"/>`;
                                 
                                        
                                            daycElement.innerHTML=dayAbbrv(6); tempElement.innerHTML=Math.floor(response.list[36].main.temp-K)+`° <span>C</span>`;
-                                     
-                                            locationElement.innerHTML=response.city.name;
+                                    
+                                           // locationElement.innerHTML=response.city.name;
                                     descElement.innerHTML=response.list[36].weather[0].description;}
 
                                      if(i==7)
-                                         {
-                                             
+                                         { 
+var stylesheet = document.getElementById('style1').disabled=true;
+
+    if(flag==0)
+        {
+       // document.styleSheets[1].remove();
+ var link = document.createElement('link');  
+   link.rel = 'stylesheet';  
+    link.type = 'text/css'; 
+     link.href = 'style.css'; 
+    link.id='style';
+    document.getElementsByTagName('HEAD')[0].appendChild(link);
+        }else{
+            var stylesheet = document.getElementById('style').disabled=false;
+        }
+        flag=1;
+      //  flag=1;
+        //document.styleSheets[2].disabled=true;
+       console.log(document.styleSheets[1]);
+        console.log(document.styleSheets[0]);
+    
+
             
     
 fetch(
@@ -199,23 +245,27 @@ fetch(
     })
     .then(function(response) {
       // day 1
+       iconElement1.innerHTML=`<img src="icons/${weather.iconID}.png"/>`;
+           tempElement1.innerHTML=`${weather.temperature.value}° <span>C</span>`;
+           descElement1.innerHTML=weather.description;
+           iconday1.innerHTML=dayAbbrv(0);
        let ic = response.list[2].weather[0].icon;
-        iconElement1.innerHTML=`<img src="icons/${ic}.png"/>`;
-        tempElement1.innerHTML=Math.floor(response.list[2].main.temp-K)+`° <span>C</span>`;
-        descElement1.innerHTML=response.list[2].weather[0].description;
-        iconday1.innerHTML=dayAbbrv(1);
+        iconElement2.innerHTML=`<img src="icons/${ic}.png"/>`;
+        tempElement2.innerHTML=Math.floor(response.list[2].main.temp-K)+`° <span>C</span>`;
+        descElement2.innerHTML=response.list[2].weather[0].description;
+        iconday2.innerHTML=dayAbbrv(1);
        ic1=ic;
         ic = response.list[10].weather[0].icon;
-        iconElement2.innerHTML=`<img src="icons/${ic}.png"/>`;
-        tempElement2.innerHTML=Math.floor(response.list[10].main.temp-K)+`° <span>C</span>`;
-        descElement2.innerHTML=response.list[10].weather[0].description;
-    iconday2.innerHTML=dayAbbrv(2);
+        iconElement3.innerHTML=`<img src="icons/${ic}.png"/>`;
+        tempElement3.innerHTML=Math.floor(response.list[10].main.temp-K)+`° <span>C</span>`;
+        descElement3.innerHTML=response.list[10].weather[0].description;
+    iconday3.innerHTML=dayAbbrv(2);
       
        ic = response.list[18].weather[0].icon;
-        iconElement3.innerHTML=`<img src="icons/${ic}.png"/>`;
-        tempElement3.innerHTML=Math.floor(response.list[18].main.temp-K)+`° <span>C</span>`;
-        descElement3.innerHTML=response.list[18].weather[0].description;
-       iconday3.innerHTML=dayAbbrv(3);
+        iconElement.innerHTML=`<img src="icons/${ic}.png"/>`;
+        tempElement.innerHTML=Math.floor(response.list[18].main.temp-K)+`° <span>C</span>`;
+        descElement.innerHTML=response.list[18].weather[0].description;
+       daycElement.innerHTML=dayAbbrv(3);
       
        ic = response.list[26].weather[0].icon;
         iconElement4.innerHTML=`<img src="icons/${ic}.png"/>`;
@@ -241,41 +291,50 @@ fetch(
 
                                              
                                              
-                                         }
-                                        
-                                        
-            if(i!=7)
-                {
+            }
+               if(i!=7)
+                {  
+                    
+            //document.styleSheets[0].disabled=true;
+ if(flag==1)                    
+var stylesheet = document.getElementById('style').disabled=true;
+    var stylesheet = document.getElementById('style1').disabled=false;
+                    
+                    if(tempElement1.innerHTML != '')
                    iconElement1.removeChild(iconElement1.childNodes[0]); 
                     console.log(iconElement1.innerHTML);
                    tempElement1.innerHTML ='';
                     descElement1.innerHTML='';
                     iconday1.innerHTML='';
-                    
+                     if(tempElement2.innerHTML != '')
                     iconElement2.removeChild(iconElement2.childNodes[0]); 
                    
                     iconElement2.innnerHTML =''; 
                    tempElement2.innerHTML ='';
                     descElement2.innerHTML='';
                     iconday2.innerHTML='';
+                     if(tempElement3.innerHTML != '')
                     iconElement3.removeChild(iconElement3.childNodes[0]); 
                    
                     iconElement3.innnerHTML =''; 
                    tempElement3.innerHTML ='';
                     descElement3.innerHTML='';
                     iconday3.innerHTML='';
+                     if(tempElement4.innerHTML != '')
                     iconElement4.removeChild(iconElement4.childNodes[0]); 
                    
                     iconElement4.innnerHTML =''; 
                    tempElement4.innerHTML ='';
                     descElement4.innerHTML='';
                     iconday4.innerHTML='';
+                     if(tempElement5.innerHTML != '')
                     iconElement5.removeChild(iconElement5.childNodes[0]); 
                    
                     iconElement5.innnerHTML =''; 
                    tempElement5.innerHTML ='';
                     descElement5.innerHTML='';
                     iconday5.innerHTML='';
+                     if(tempElement6.innerHTML != '')
                     iconElement6.removeChild(iconElement6.childNodes[0]); 
                    
                     iconElement6.innnerHTML =''; 

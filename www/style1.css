@@ -1,6 +1,6 @@
 #searchBar{
     border: 1px solid #000000;
-    
+    margin: 10px;
     font-size: 50pix;
     padding: 10px;
     outline: none;
@@ -12,6 +12,7 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     background: #f1d529;
+    width: 15vw;
 }
 #searchBtn{
     border: 1px solid #000000;
@@ -28,7 +29,7 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
-}
+}    
 
 button{
     background: none;
@@ -41,7 +42,8 @@ button{
     overflow: hidden;
     
     
-} 
+}
+
 .container1{
   /*padding:7px;
   border-top:none;
@@ -52,26 +54,23 @@ button{
   text-align: center;
     height: 260px; */
     width: 70vw;    
-    background-color: #ffffff;
+    background-color: #FFF;
     position: absolute;
-   display: flex; 
+    display: flex;
     margin: 15vw;
     height: 300px;
     border-radius: 10px;
     padding-bottom : 0px;
     text-align: center;
-   border-top:1px solid black;
-    border-bottom:1px solid black;
-    border-left: 1px solid black;
+    
 }
 
 .container2{
   flex:1;
   font-size: 2vh;
-  border-right: 1px solid black;
-    border-left: 1px solid black
-    
+  
 }
+
 
 
 
@@ -80,8 +79,5 @@ button{
 }
 
 body{
-    background-color: #ffffff;
+    background-color: #FFF;
 }
-
-
-
